@@ -6,8 +6,18 @@
   <body>
     <h1>{{ title }}</h1>
     {{# accomplishment }}
-      <div>
+      <ul>
+        <li>{{ accomplishments }}</li>
+      </ul>
     {{/ accomplishment }}
+    {{# patient }}
+    <ul id="patient-info">
+      <li>name: {{name}}</li>
+      <li>height: {{height}}</li>
+      <li>weight: {{weight}}</li>
+      <li>age: {{age}}</li>
+    </ul>
+    {{/ patient }}
     <p> this is a test pdf </p>
   </body>
 </html>

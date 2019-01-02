@@ -1,7 +1,9 @@
 /* use strict */;
+const puppeteer = require('puppeteer')
+
 function getData(url, json) {
   let pdfData;
-  if (url) { pdfData = url }
+  if (url) { pdfData = { url } }
   if (json) {
     try {
       pdfData = JSON.parse(json)
@@ -17,6 +19,9 @@ function getData(url, json) {
 class GeneratePDF {
   constructor(url, json, template) {
     this.data = getData(url, json)
+  }
+
+  createPDF() {
   }
 }
 
