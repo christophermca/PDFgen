@@ -29,7 +29,8 @@ app.get('/', (req, res) => {
 
 app.post('/generate_pdf', (req, res) => {
   const {url, json, template} = req.body
-  const PDFGen = new PDFGenerator(url, json, template);
+  new PDFGenerator(url, json, template)
+    .createPDF().then((pdf) => res.send(pdf));
 });
 
 app.listen(port, () => console.log(message));
