@@ -22,18 +22,22 @@ class GeneratePDF {
   }
 
   createPDF() {
-    return Promise((resolve, reject) => {
-      puppeteer.launch()
-      .then(browser => browser.newPage())
-      .then(page => {
-        page.goto(`${url}`, {waitUntl: 'networkidle2'})
-          .then((pdf) => resolve(pdf));
-      }).catch(err => {
-        console.log(err)
+    if (this.data.url) {
+        const browser = Promise.resolve(puppeteer.launch());
+        const page = Promise.resolve(browser.newPage());
+        Promise.resolve(page.setrequetInterception(true))
+
+      page.on('request', interceptedRequest => {
+        const data = this.data
         debugger
-      })
+        interceptedRequest.continue(data)
+      }).bind(this)
+
+
+    }
 
     });
+    return
   }
 }
 
