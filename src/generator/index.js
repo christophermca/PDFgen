@@ -1,5 +1,6 @@
 /* use strict */;
 const puppeteer = require('puppeteer')
+const path = require('path');
 
 function getData(url, json) {
   return url ? url : json;
@@ -14,13 +15,19 @@ class GeneratePDF {
   createPDF() {
     switch(typeof this.data) {
       case 'string':
-        (async() => {
+        return (async() => {
           const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
           console.log(await browser.version());
           const page = await browser.newPage();
-          await page.goto(`this.data`);
-          await page.pdf({path: '/tmp/google.pdf'});
-          // await browser.close();
+          try {
+            await page.goto(`${this.data}`);
+            debugger
+            return await page.pdf({path: 'testing.pdf', format: "Letter"});
+          } catch(err) {
+            console.log(err)
+            process.exit()
+          }
+            await browser.close();
         })();
 
         break;

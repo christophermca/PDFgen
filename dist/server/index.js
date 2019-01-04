@@ -42,7 +42,10 @@ app.post('/generate_pdf', function (req, res) {
       json = _req$body.json,
       template = _req$body.template;
 
-  new PDFGenerator(url, json, template).createPDF();
+  var pdfGen = new PDFGenerator(url, json, template).createPDF().then(function () {
+    res.type('application/pdf');
+    res.sendFile(path.resolve(__dirname, '..', '/generator/tmp/temp.pdf'));
+  });
 });
 
 app.listen(port, function () {

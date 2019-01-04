@@ -8,6 +8,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /* use strict */;
 var puppeteer = require('puppeteer');
+var path = require('path');
 
 function getData(url, json) {
   return url ? url : json;
@@ -23,16 +24,24 @@ var GeneratePDF = function () {
   _createClass(GeneratePDF, [{
     key: 'createPDF',
     value: function createPDF() {
+      var _this = this;
+
       switch (_typeof(this.data)) {
         case 'string':
-          (async function () {
+          return async function () {
             var browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
             console.log((await browser.version()));
             var page = await browser.newPage();
-            await page.goto('this.data');
-            await page.pdf({ path: '/tmp/google.pdf' });
-            // await browser.close();
-          })();
+            try {
+              await page.goto('' + _this.data);
+              debugger;
+              return await page.pdf({ path: 'testing.pdf', format: "Letter" });
+            } catch (err) {
+              console.log(err);
+              process.exit();
+            }
+            await browser.close();
+          }();
 
           break;
         case 'object':
