@@ -1,0 +1,6 @@
+{
+  "defaults": {
+    "template": "generic_template",
+    "ext": "html"
+  }
+}
