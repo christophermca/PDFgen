@@ -6,14 +6,14 @@ const port = 3380;
 const message = 'PDF Generator app is running....'
 const PDFGenerator = require('../generator')
 const mustacheExpress = require('mustache-express')
-const {defaults: {template, ext}} = require('../../config.json')
+const {defaults: {genericTemplateName, ext}} = require('../../config.json')
 
 // To Use Mustache templating
 app.engine(ext, mustacheExpress());
 app.set('view engine', ext);
 app.set('views', path.resolve(__dirname, '..',
                               '/generator/template/',
-                              template, `.${ext}`)
+                              `{genericTemplateName}`, `.${ext}`)
 )
 
 // To read req body: needed for POST
@@ -33,9 +33,8 @@ app.get('/', (req, res) => {
 
 app.post('/generate_pdf', (req, res) => {
   const {url, json, template} = req.body
-  const pdfGen = new PDFGenerator(url, json, template).createPDF().then(() => {
-     res.type('application/pdf')
-     res.sendFile(path.resolve(__dirname, '..', '/generator/tmp/temp.pdf'))
+  new PDFGenerator(url, json, template).createPDF().then(fileName => {
+    return res.sendFile(path.resolve(`./tmp/${fileName}.pdf`))
   });
 });
 

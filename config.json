@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "template": "generic_template",
+    "genericTemplateName": "generic_template",
     "ext": "html"
   }
 }

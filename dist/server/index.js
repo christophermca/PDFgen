@@ -11,7 +11,7 @@ var mustacheExpress = require('mustache-express');
 
 var _require = require('../../config.json'),
     _require$defaults = _require.defaults,
-    template = _require$defaults.template,
+    genericTemplateName = _require$defaults.genericTemplateName,
     ext = _require$defaults.ext;
 
 // To Use Mustache templating
@@ -19,7 +19,7 @@ var _require = require('../../config.json'),
 
 app.engine(ext, mustacheExpress());
 app.set('view engine', ext);
-app.set('views', path.resolve(__dirname, '..', '/generator/template/', template, '.' + ext));
+app.set('views', path.resolve(__dirname, '..', '/generator/template/', '{genericTemplateName}', '.' + ext));
 
 // To read req body: needed for POST
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,9 +42,8 @@ app.post('/generate_pdf', function (req, res) {
       json = _req$body.json,
       template = _req$body.template;
 
-  var pdfGen = new PDFGenerator(url, json, template).createPDF().then(function () {
-    res.type('application/pdf');
-    res.sendFile(path.resolve(__dirname, '..', '/generator/tmp/temp.pdf'));
+  new PDFGenerator(url, json, template).createPDF().then(function (fileName) {
+    return res.sendFile(path.resolve('./tmp/' + fileName + '.pdf'));
   });
 });
 

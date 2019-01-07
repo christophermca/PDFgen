@@ -22,8 +22,12 @@
     "sinon": "^7.2.2"
   },
   "scripts": {
-    "build": "babel src -d dist",
-    "start": "yarn run build && node inspect ./dist/server/index.js",
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "build": "babel src -d dist \"$@\"",
+    "watch": "yarn run build --watch ",
+    "start": "node ./dist/server/index.js",
+    "clean": "rm -rf ./tmp/*.pdf",
+    "debug": "node inspect ./dist/server/index.js",
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "stop": "pkill node"
   }
 }
