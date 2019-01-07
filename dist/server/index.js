@@ -42,8 +42,9 @@ app.post('/generate_pdf', function (req, res) {
       json = _req$body.json,
       template = _req$body.template;
 
-  new PDFGenerator(url, json, template).createPDF().then(function (fileName) {
-    return res.sendFile(path.resolve('./tmp/' + fileName + '.pdf'));
+  new PDFGenerator(url, json, template).createPDF().then(function (pdfName) {
+    if (!pdfName) res.status(500);
+    return res.sendFile(path.resolve('./tmp/' + pdfName + '.pdf'));
   });
 });
 

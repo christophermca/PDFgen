@@ -12,17 +12,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var puppeteer = require('puppeteer');
 var path = require('path');
 var config = require('../../config.json');
-var mustache = require('mustache');
 
 function getData(url, json) {
   return url ? url : JSON.parse(json);
 }
 
-function _generateTemplate(template, data) {
-  mustache;
-}
-
-function _initBrowser() {
+function _setup() {
   return async function () {
     var browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
     var page = await browser.newPage();
@@ -31,8 +26,17 @@ function _initBrowser() {
   }();
 }
 
+function _tareDown(_ref) {
+  var _ref$pdfName = _ref.pdfName,
+      pdfName = _ref$pdfName === undefined ? '' : _ref$pdfName,
+      browser = _ref.browser;
+
+  browser.close();
+  return pdfName;
+}
+
 function _chromePDF(template) {
-  return _initBrowser().then(function (args) {
+  return _setup().then(function (args) {
     var _args = _slicedToArray(args, 2),
         page = _args[0],
         browser = _args[1];
@@ -44,13 +48,14 @@ function _chromePDF(template) {
         await page.goto(template);
         page.emulateMedia('screen');
         await page.pdf({ path: './tmp/' + pdfName + '.pdf', format: 'Letter' });
-        return pdfName;
+        return { pdfName: pdfName, browser: browser };
       }();
     } catch (err) {
       console.log(err);
-    } finally {
-      browser.close();
+      return { browser: browser };
     }
+  }).then(function (args) {
+    return _tareDown(args);
   });
 }
 

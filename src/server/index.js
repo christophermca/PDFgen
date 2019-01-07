@@ -33,8 +33,9 @@ app.get('/', (req, res) => {
 
 app.post('/generate_pdf', (req, res) => {
   const {url, json, template} = req.body
-  new PDFGenerator(url, json, template).createPDF().then(fileName => {
-    return res.sendFile(path.resolve(`./tmp/${fileName}.pdf`))
+  new PDFGenerator(url, json, template).createPDF().then(pdfName => {
+    if ( !pdfName ) res.status(500)
+    return res.sendFile(path.resolve(`./tmp/${pdfName}.pdf`))
   });
 });
 

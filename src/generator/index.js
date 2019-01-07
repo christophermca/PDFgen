@@ -2,19 +2,12 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 const config = require('../../config.json');
-const mustache = require('mustache');
 
 function getData(url, json) {
   return url ? url : JSON.parse(json);
 }
 
-function _generateTemplate(template, data) {
-  mustache
-
-
-}
-
-function _initBrowser() {
+function _setup() {
   return (async() => {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
     const page = await browser.newPage();
@@ -23,8 +16,13 @@ function _initBrowser() {
   })();
 }
 
+function _tareDown({ pdfName = '', browser }) {
+     browser.close()
+     return pdfName
+}
+
 function _chromePDF(template) {
-   return _initBrowser().then(args => {
+   return _setup().then(args => {
      const [ page, browser ] = args
      const pdfName = 'testing'
 
@@ -33,16 +31,14 @@ function _chromePDF(template) {
          await page.goto(template);
          page.emulateMedia('screen');
          await page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
-         return pdfName
+         return { pdfName, browser }
        })();
      }
      catch(err) {
        console.log(err)
+       return {browser}
      }
-     finally {
-       browser.close()
-     }
-   });
+   }).then(args =>_tareDown(args))
 }
 
 class GeneratePDF {
