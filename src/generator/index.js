@@ -1,63 +1,49 @@
-/* use strict */;
-const puppeteer = require('puppeteer');
+'use strict';
+
 const path = require('path');
 const config = require('../../config.json');
+const browserAPI = require('./BrowserAPI.js');
+const mustache = require('mustache');
+const fs = require('fs');
 
 function getData(url, json) {
   return url ? url : JSON.parse(json);
 }
 
-function _setup() {
-  return (async() => {
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-    const page = await browser.newPage();
+function _generateTemplate(filePath, data) {
+  try {
+    return (async() => {
+      const filename = await require.resolve(filePath);
+      const template = await fs.readFileSync(filePath, 'utf8');
+      const templateString = await mustache.render(template, data)
 
-    return [page, browser]
-  })();
-}
+      return templateString
+    })();
+  }
+  catch(err) {
+    console.log(err)
+    return Promise.reject(err)
+  }
 
-function _tareDown({ pdfName = '', browser }) {
-     browser.close()
-     return pdfName
-}
-
-function _chromePDF(template) {
-   return _setup().then(args => {
-     const [ page, browser ] = args
-     const pdfName = 'testing'
-
-     try {
-       return (async() => {
-         await page.goto(template);
-         page.emulateMedia('screen');
-         await page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
-         return { pdfName, browser }
-       })();
-     }
-     catch(err) {
-       console.log(err)
-       return {browser}
-     }
-   }).then(args =>_tareDown(args))
 }
 
 class GeneratePDF {
   constructor(url, json, template) {
     this.data = getData(url, json)
-    this.template = config['defaults']['genericTemplateName']
+    this.templateData = config['defaults']
   }
 
   createPDF() {
     switch(typeof this.data) {
       case 'string':
-        return _chromePDF(`${this.data}`)
+        return browserAPI.chromePDF(`${this.data}`)
         break;
       case 'object':
         if (this.data) {
-          const template = _generateTemplate(this.template, this.data)
-          return _chromePDF(`${template}`)
+          return _generateTemplate(path.resolve(__dirname, `./template/${this.templateData.name}${this.templateData.ext}`), this.data)
+            .then(templateString => browserAPI.chromePDF(`${templateString}`))
           break;
-        }
+            }
       default:
         throw new TypeError('invalid data given to `createPDF`')
     }

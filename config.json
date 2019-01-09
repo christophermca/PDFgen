@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "genericTemplateName": "generic_template",
-    "ext": "html"
+    "name": "index",
+    "ext": ".html.mustache"
   }
 }

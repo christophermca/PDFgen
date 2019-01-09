@@ -14,14 +14,17 @@ var _require = require('../../config.json'),
     genericTemplateName = _require$defaults.genericTemplateName,
     ext = _require$defaults.ext;
 
-// To Use Mustache templating
-
-
-app.engine(ext, mustacheExpress());
-app.set('view engine', ext);
-app.set('views', path.resolve(__dirname, '..', '/generator/template/', '{genericTemplateName}', '.' + ext));
+// // To Use Mustache templating
+// app.engine(ext, mustacheExpress());
+// app.set('view engine', ext);
+// app.set('views', path.resolve(__dirname, '..',
+//                               '/generator/template/',
+//                               `{genericTemplateName}`, `.${ext}`)
+// )
 
 // To read req body: needed for POST
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -33,7 +36,7 @@ app.use(function (err, req, res, next) {
 
 // REST API
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/index.html'));
+  res.sendFile(path.resolve(__dirname + '/views/index.html'));
 });
 
 app.post('/generate_pdf', function (req, res) {

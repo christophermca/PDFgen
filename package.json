@@ -24,9 +24,9 @@
   "scripts": {
     "build": "babel src -d dist \"$@\"",
     "watch": "yarn run build --watch ",
-    "start": "node ./dist/server/index.js",
+    "start": "yarn run build && node ./dist/server/index.js",
+    "debug": "yarn run build && node inspect ./dist/server/index.js",
     "clean": "rm -rf ./tmp/*.pdf",
-    "debug": "node inspect ./dist/server/index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "stop": "pkill node"
   }
