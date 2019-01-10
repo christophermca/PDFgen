@@ -7,20 +7,11 @@ var app = express();
 var port = 3380;
 var message = 'PDF Generator app is running....';
 var PDFGenerator = require('../generator');
-var mustacheExpress = require('mustache-express');
 
 var _require = require('../../config.json'),
     _require$defaults = _require.defaults,
     genericTemplateName = _require$defaults.genericTemplateName,
     ext = _require$defaults.ext;
-
-// // To Use Mustache templating
-// app.engine(ext, mustacheExpress());
-// app.set('view engine', ext);
-// app.set('views', path.resolve(__dirname, '..',
-//                               '/generator/template/',
-//                               `{genericTemplateName}`, `.${ext}`)
-// )
 
 // To read req body: needed for POST
 

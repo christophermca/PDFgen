@@ -13,18 +13,14 @@ var BrowserAPI = function () {
 
   _createClass(BrowserAPI, [{
     key: 'setup',
-    value: function setup() {
-      var _this = this;
+    value: async function setup() {
+      var browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+      var page = await browser.newPage();
 
-      return async function () {
-        var browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-        var page = await browser.newPage();
+      this.browser = browser;
+      this.page = page;
 
-        _this.browser = browser;
-        _this.page = page;
-
-        return { page: page, browser: browser };
-      }();
+      return { page: page, browser: browser };
     }
   }, {
     key: 'tareDown',
@@ -38,7 +34,7 @@ var BrowserAPI = function () {
   }, {
     key: 'chromePDF',
     value: function chromePDF(template) {
-      var _this2 = this;
+      var _this = this;
 
       var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "testing";
 
@@ -48,10 +44,15 @@ var BrowserAPI = function () {
 
         try {
           return async function () {
-            await _this2.page.setContent(template);
-            //await this.page.goto(template);
-            _this2.page.emulateMedia('screen');
-            await _this2.page.pdf({ path: './tmp/' + pdfName + '.pdf', format: 'Letter' });
+
+            if (/^(https?:\/\/)/.test(template)) {
+              await _this.page.goto(template);
+            } else {
+              await _this.page.setContent(template);
+            }
+
+            _this.page.emulateMedia('screen');
+            await _this.page.pdf({ path: './tmp/' + pdfName + '.pdf', format: 'Letter' });
             return { pdfName: pdfName };
           }();
         } catch (err) {
@@ -59,7 +60,7 @@ var BrowserAPI = function () {
           return;
         }
       }).then(function (args) {
-        return _this2.tareDown(args);
+        return _this.tareDown(args);
       });
     }
   }]);

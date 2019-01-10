@@ -2,16 +2,14 @@
 const puppeteer = require('puppeteer');
 
 class BrowserAPI {
-  setup() {
-    return (async() => {
-      const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-      const page = await browser.newPage();
+  async setup() {
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const page = await browser.newPage();
 
-      this.browser = browser;
-      this.page = page
+    this.browser = browser;
+    this.page = page
 
-      return {page, browser}
-    })();
+    return {page, browser}
   }
 
   tareDown({ pdfName = ''}) {
@@ -22,12 +20,16 @@ class BrowserAPI {
   chromePDF(template, name="testing") {
     return this.setup().then(() => {
       const pdfName = name;
-      debugger
 
       try {
         return (async() => {
-          await this.page.setContent(template)
-          //await this.page.goto(template);
+
+          if (/^(https?:\/\/)/.test(template)) {
+            await this.page.goto(template);
+          } else {
+            await this.page.setContent(template)
+          }
+
           this.page.emulateMedia('screen');
           await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
           return { pdfName }

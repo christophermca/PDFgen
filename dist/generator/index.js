@@ -16,15 +16,13 @@ function getData(url, json) {
   return url ? url : JSON.parse(json);
 }
 
-function _generateTemplate(filePath, data) {
+async function _generateTemplate(filePath, data) {
   try {
-    return async function () {
-      var filename = await require.resolve(filePath);
-      var template = await fs.readFileSync(filePath, 'utf8');
-      var templateString = await mustache.render(template, data);
+    var filename = require.resolve(filePath);
+    var template = fs.readFileSync(filePath, 'utf8');
+    var templateString = mustache.render(template, data);
 
-      return templateString;
-    }();
+    return templateString;
   } catch (err) {
     console.log(err);
     return Promise.reject(err);
@@ -42,6 +40,7 @@ var GeneratePDF = function () {
   _createClass(GeneratePDF, [{
     key: 'createPDF',
     value: function createPDF() {
+      debugger;
       switch (_typeof(this.data)) {
         case 'string':
           return browserAPI.chromePDF('' + this.data);

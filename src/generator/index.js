@@ -10,15 +10,13 @@ function getData(url, json) {
   return url ? url : JSON.parse(json);
 }
 
-function _generateTemplate(filePath, data) {
+async function _generateTemplate(filePath, data) {
   try {
-    return (async() => {
-      const filename = await require.resolve(filePath);
-      const template = await fs.readFileSync(filePath, 'utf8');
-      const templateString = await mustache.render(template, data)
+      const filename = require.resolve(filePath);
+      const template = fs.readFileSync(filePath, 'utf8');
+      const templateString = mustache.render(template, data)
 
       return templateString
-    })();
   }
   catch(err) {
     console.log(err)
