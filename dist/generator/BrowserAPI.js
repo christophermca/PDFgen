@@ -5,22 +5,24 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var puppeteer = require('puppeteer');
+var path = require('path');
 
 var BrowserAPI = function () {
   function BrowserAPI() {
     _classCallCheck(this, BrowserAPI);
+
+    this.setup.call(this);
   }
 
   _createClass(BrowserAPI, [{
     key: 'setup',
     value: async function setup() {
+      console.log('setting up browser');
       var browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
       var page = await browser.newPage();
 
       this.browser = browser;
       this.page = page;
-
-      return { page: page, browser: browser };
     }
   }, {
     key: 'tareDown',
@@ -28,7 +30,7 @@ var BrowserAPI = function () {
       var _ref$pdfName = _ref.pdfName,
           pdfName = _ref$pdfName === undefined ? '' : _ref$pdfName;
 
-      this.browser.close();
+      this.browser.disconnect();
       return pdfName;
     }
   }, {
@@ -38,34 +40,31 @@ var BrowserAPI = function () {
 
       var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "testing";
 
-      return this.setup().then(function () {
-        var pdfName = name;
-        debugger;
+      console.log('chromePDF');
+      var pdfName = name;
 
-        try {
-          return async function () {
+      try {
+        return async function () {
+          if (/^(https?:\/\/)/.test(template)) {
+            await _this.page.goto(template);
+          } else {
+            debugger;
+            await _this.page.setContent(template);
+          }
 
-            if (/^(https?:\/\/)/.test(template)) {
-              await _this.page.goto(template);
-            } else {
-              await _this.page.setContent(template);
-            }
-
-            _this.page.emulateMedia('screen');
-            await _this.page.pdf({ path: './tmp/' + pdfName + '.pdf', format: 'Letter' });
-            return { pdfName: pdfName };
-          }();
-        } catch (err) {
-          console.log(err);
-          return;
-        }
-      }).then(function (args) {
-        return _this.tareDown(args);
-      });
+          await _this.page.emulateMedia('screen');
+          await _this.page.addStyleTag({ path: path.resolve(__dirname, './template/index.css') });
+          await _this.page.pdf({ path: './tmp/' + pdfName + '.pdf', format: 'Letter' });
+          return pdfName;
+        }();
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   }]);
 
   return BrowserAPI;
 }();
 
-module.exports = new BrowserAPI();
+module.exports = BrowserAPI;

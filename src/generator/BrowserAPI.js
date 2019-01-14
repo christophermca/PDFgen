@@ -1,46 +1,51 @@
 'use strict'
 const puppeteer = require('puppeteer');
+const path = require('path');
 
 class BrowserAPI {
+  constructor() {
+    this.setup.call(this)
+  }
+
   async setup() {
+    console.log('setting up browser');
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
     const page = await browser.newPage();
 
     this.browser = browser;
     this.page = page
 
-    return {page, browser}
   }
 
   tareDown({ pdfName = ''}) {
-    this.browser.close()
+    this.browser.disconnect()
     return pdfName
   }
 
   chromePDF(template, name="testing") {
-    return this.setup().then(() => {
-      const pdfName = name;
+    console.log('chromePDF')
+    const pdfName = name;
 
-      try {
-        return (async() => {
+    try {
+      return (async() => {
+        if (/^(https?:\/\/)/.test(template)) {
+          await this.page.goto(template);
+        } else {
+          debugger
+          await this.page.setContent(template)
+        }
 
-          if (/^(https?:\/\/)/.test(template)) {
-            await this.page.goto(template);
-          } else {
-            await this.page.setContent(template)
-          }
-
-          this.page.emulateMedia('screen');
-          await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
-          return { pdfName }
-        })();
-      }
-      catch(err) {
-        console.log(err)
-        return
-      }
-    }).then(args => this.tareDown(args))
+        await this.page.emulateMedia('screen');
+        await this.page.addStyleTag({path: path.resolve(__dirname, './template/index.css')});
+        await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
+        return pdfName
+      })();
+    }
+    catch(err) {
+      console.log(err)
+      return
+    }
   }
 }
 
-module.exports = new BrowserAPI()
+module.exports = BrowserAPI;

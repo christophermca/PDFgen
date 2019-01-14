@@ -2,7 +2,7 @@
 
 const path = require('path');
 const config = require('../../config.json');
-const browserAPI = require('./BrowserAPI.js');
+const browserAPI = new (require('./BrowserAPI'))();
 const mustache = require('mustache');
 const fs = require('fs');
 
@@ -11,6 +11,7 @@ function getData(url, json) {
 }
 
 async function _generateTemplate(filePath, data) {
+  console.log('generating Template')
   try {
       const filename = require.resolve(filePath);
       const template = fs.readFileSync(filePath, 'utf8');
@@ -32,6 +33,7 @@ class GeneratePDF {
   }
 
   createPDF() {
+    console.log('creating PDF');
     switch(typeof this.data) {
       case 'string':
         return browserAPI.chromePDF(`${this.data}`)

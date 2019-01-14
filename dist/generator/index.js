@@ -8,7 +8,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var path = require('path');
 var config = require('../../config.json');
-var browserAPI = require('./BrowserAPI.js');
+var browserAPI = new (require('./BrowserAPI'))();
 var mustache = require('mustache');
 var fs = require('fs');
 
@@ -17,6 +17,7 @@ function getData(url, json) {
 }
 
 async function _generateTemplate(filePath, data) {
+  console.log('generating Template');
   try {
     var filename = require.resolve(filePath);
     var template = fs.readFileSync(filePath, 'utf8');
@@ -40,7 +41,7 @@ var GeneratePDF = function () {
   _createClass(GeneratePDF, [{
     key: 'createPDF',
     value: function createPDF() {
-      debugger;
+      console.log('creating PDF');
       switch (_typeof(this.data)) {
         case 'string':
           return browserAPI.chromePDF('' + this.data);

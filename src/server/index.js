@@ -25,8 +25,12 @@ app.get('/', (req, res) => {
 app.post('/generate_pdf', (req, res) => {
   const {url, json, template} = req.body
   new PDFGenerator(url, json, template).createPDF().then(pdfName => {
+    debugger
     if ( !pdfName ) res.status(500)
-    return res.sendFile(path.resolve(`./tmp/${pdfName}.pdf`))
+    const pathLocation = `./tmp/${pdfName}.pdf`;
+    return res.sendFile(path.resolve(pathLocation))
+  }).then(pathLocation => {
+    console.log(`PDf saved to: ${pathLocation}` )
   });
 });
 
