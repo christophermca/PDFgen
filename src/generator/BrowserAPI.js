@@ -1,11 +1,9 @@
 'use strict'
 const puppeteer = require('puppeteer');
 const path = require('path');
+const Graph = require('./presenter/graph');
 
 class BrowserAPI {
-  constructor() {
-    this.setup.call(this)
-  }
 
   async setup() {
     console.log('setting up browser');
@@ -13,37 +11,42 @@ class BrowserAPI {
     const page = await browser.newPage();
 
     this.browser = browser;
-    this.page = page
+    this.page = page;
+    return Promise.resolve(this)
 
   }
 
-  tareDown({ pdfName = ''}) {
+  tareDown() {
     this.browser.disconnect()
-    return pdfName
   }
 
-  chromePDF(template, name="testing") {
-    console.log('chromePDF')
-    const pdfName = name;
+  async saveAsPDF(pdfName='testing') {
+    if (this.page) {
+      await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
+      return pdfName
+    }
+  }
+
+
+  async renderPage(template) {
+    console.log('rendering page')
 
     try {
-      return (async() => {
-        if (/^(https?:\/\/)/.test(template)) {
-          await this.page.goto(template);
-        } else {
-          debugger
-          await this.page.setContent(template)
-        }
+      if (/^(https?:\/\/)/.test(template)) {
+        await this.page.goto(template);
+      } else {
+        await this.page.setContent(template)
 
-        await this.page.emulateMedia('screen');
+        // Adds styles to page
+        await this.page.emulateMedia('print');
         await this.page.addStyleTag({path: path.resolve(__dirname, './template/index.css')});
-        await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
-        return pdfName
-      })();
+
+
+      }
     }
+
     catch(err) {
-      console.log(err)
-      return
+      return Promise.reject(err)
     }
   }
 }

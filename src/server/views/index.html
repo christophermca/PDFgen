@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- TODO onclick submit form ajax call -->
-    <script type="text/javascript" src=""></script>
   </head>
   <body>
     <form action="/generate_pdf" method="post">
       <input type="text" name="url" placeholder='enter url'/>
-      <textarea type="text" name="json" placeholder='enter json'>{"title": "test"}</textarea>
+      <textarea type="text" name="json" placeholder='enter json'>{"title": "test", "d3": true}</textarea>
       <button type="submit">Generate PDF</button>
     </form>
   </body>
