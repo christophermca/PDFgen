@@ -22,7 +22,10 @@ class Graph {
   // TODO Fix timing ?, D3 not rendering
   render({d3: csv}) {
     return new Promise((resolve, reject) => {
-      return exampleGraph(this.DOM, csv).then(graph => resolve(graph));
+      if(csv) {
+        return exampleGraph(this.DOM, csv).then(graph => resolve(graph));
+      }
+      return Promise.resolve(undefined)
     })
   }
 }

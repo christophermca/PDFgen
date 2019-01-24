@@ -3,8 +3,14 @@
 <html>
   <head>
   </head>
-  <body>
+  <header>
     <h1>{{ title }}</h1>
+    {{# systems }}
+      <p>PDF generated using {{ pdfGenBrowser }} browser!</p>
+      <p>PDF requested from {{ pdfRequester }} </p>
+    {{/ systems }}
+  </header>
+  <body>
     {{# d3 }}
       <div class="dataviz"></div>
     {{/ d3 }}

@@ -29,10 +29,14 @@ function _generateTemplate(filePath, data) {
 
       const templateString = mustache.render(template, data);
 
+      // generate Graphs
+    if (data && data.d3) {
       const graph = new Graph(templateString);
       return graph.render(data).then(html => {
         return Promise.resolve(html)
       });
+    }
+    return Promise.resolve(templateString);
 
   }
   catch(err) {
