@@ -8,6 +8,14 @@ const PDFGenerator = require('../generator')
 const fs = require('fs');
 const {defaults: {genericTemplateName, ext}} = require('../../config.json')
 
+// check if tmp directory exists
+const dir = './tmp';
+
+console.log('verify tmp/ exists')
+if (! fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
+
 // To read req body: needed for POST
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
