@@ -2,26 +2,21 @@
 
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
   </head>
   <header>
-    <h1>{{ title }}</h1>
-    {{# systems }}
-      <p>PDF generated using {{ pdfGenBrowser }} browser!</p>
-      <p>PDF requested from {{ pdfRequester }} </p>
-    {{/ systems }}
+    <h3>Weekly Progress Report</h3>
+    {{# teamMembers}}
+    <ul>
+      {{# name}}
+        <li>{{name}} --  {{position}}</li>
+      {{/ name}}
+    </ul>
+    {{/ teamMembers}}
   </header>
   <body>
-    {{# d3 }}
-      <div class="dataviz"></div>
-    {{/ d3 }}
-    {{# patient }}
-    <ul id="patient-info">
-      <li>name: {{name}}</li>
-      <li>height: {{height}}</li>
-      <li>weight: {{weight}}</li>
-      <li>age: {{age}}</li>
-    </ul>
-    {{/ patient }}
+    <h3> What we did? </h3>
+    <h3> What issues came up? </h3>
   </body>
-  <footer> this is a test pdf </footer>
+  <footer>Nexient LLC</footer>
 </html>

@@ -6,10 +6,15 @@ const port = 3380;
 const message = 'PDF Generator app is running....'
 const PDFGenerator = require('../generator')
 const fs = require('fs');
-const {defaults: {genericTemplateName, ext}} = require('../../config.json')
+const config = require('../../config.json')
+const mustacheExpress = require('mustache-express')
 
 // check if tmp directory exists
 const dir = './tmp';
+// To Use Mustache templating
+app.engine('html.mustache', mustacheExpress());
+app.set('view engine', 'html.mustache');
+app.set('views', __dirname +  '/..' + '/generator/template/')
 
 console.log('verify tmp/ exists')
 if (! fs.existsSync(dir)) {
@@ -31,8 +36,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/views/index.html'));
 });
 
+const publicPath = path.resolve(__dirname, 'dist/')
+app.use('/demo_html', express.static(publicPath))
+app.get('/demo_html', (req, res) => {
+  res.render('index', config)
+});
+
 app.get('/patient_data', (req, res) => {
-  res.sendFile(path.resolve(__dirname + './stubCSVData.csv'));
+  res.sendFile(path.resolve(__dirname + '/stubCSVData.csv'));
 });
 
 app.post('/generate_pdf', (req, res) => {

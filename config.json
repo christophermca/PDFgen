@@ -2,5 +2,25 @@
   "defaults": {
     "name": "index",
     "ext": ".html.mustache"
-  }
+  },
+  "teamMembers": [
+    {
+      "name": "Christopher McAdams",
+      "position": "Senior Software Engineer",
+      "githubHandle": "cmcadams"
+    },
+    {
+      "name": "Carl Ellis",
+      "position": "Software Engineer",
+      "githubHandle": "cellis"
+    },
+    {
+      "name": "Manasi Gore",
+      "position": "Software Engineer",
+      "githubHandle": "mgore"
+    },
+    { "name": "Heather McDonald-Sand",
+      "position": "Designer"
+    }
+  ]
 }
