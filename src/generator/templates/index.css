@@ -1,0 +1,11 @@
+h1 {
+  color: teal;
+  font-size: 36pt;
+}
+
+footer {
+  color: lightGrey;
+  font-size: 4em;
+  -webkit-text-stroke-color: teal;
+  -webkit-text-stroke-width: 2px;
+}

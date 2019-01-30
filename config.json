@@ -1,0 +1,6 @@
+{
+  "defaults": {
+    "name": "index",
+    "ext": ".html.mustache"
+  }
+}
