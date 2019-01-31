@@ -21,8 +21,8 @@
   <body>
     <main>
       <form action="/generate_pdf" method="post">
-        <input type="text" name="url" placeholder='enter url'/>
-        <textarea rows=30 cols=60 name="json-data" type="text" placeholder='Provide JSON formatted data'>{"test": true}</textarea>
+        <input disabled type="text" name="url" placeholder='[disabled] enter url'/>
+        <textarea rows=30 cols=60 name="json-data" type="text" placeholder='Provide JSON formatted data'>{{data}}</textarea>
         <button type="submit">Generate PDF</button>
       </form>
     </main>
