@@ -1,6 +1,32 @@
-h1 {
-  color: teal;
-  font-size: 36pt;
+body {
+  margin: 32px 40px 25px;
+}
+
+header, footer {
+  min-height:101px;
+  background-color: purple
+}
+header h2 {
+  margin: 0;
+}
+
+main {
+  min-height:300px;
+  display: flex;
+  flex-direction: row;
+}
+
+section {
+  margin: 2px;
+  background-color: #0f0;
+}
+
+#digimeds {
+  width: 156px;
+}
+
+section:last-of-type {
+  flex-grow: 1;
 }
 
 footer {

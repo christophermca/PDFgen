@@ -5,10 +5,22 @@
     <title>Rendered Template</title>
     <link rel="stylesheet" type="text/css" href="/index.css">
   </head>
-  <header>
-    <h1>title: {{ title }}</h1>
-  </header>
   <body>
+    <header>
+      {{# patientData }}
+        <h2>{{name}}</h2>
+      {{/ patientData }}
+    </header>
+    <main>
+      <section id="digimeds">digimeds</section>
+      <section>
+        <div>section-content</div>
+        <div>section-content</div>
+        <div>section-content</div>
+        <div>section-content</div>
+      </section>
+    </main>
+    <footer> this is a test pdf </footer>
+
   </body>
-  <footer> this is a test pdf </footer>
 </html>
