@@ -1,6 +1,10 @@
 {
   "title": "stubData",
   "patientData": {
-    "name": "Fredrick Blankenship"
+    "name": "Fredrick Blankenship",
+    "DOB": "Feb 3, 1969 (49 yrs)",
+    "sex": "Male",
+    "firstIngestion": "Oct 31, 2018",
+    "condition": "Cardiometabolic"
   }
 }

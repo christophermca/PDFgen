@@ -1,37 +1,96 @@
-body {
-  margin: 32px 40px 25px;
+/* for development */
+@media screen {
+  html {
+    border: 1px solid red;
+    height: 1056px;
+    background: teal;
+    width: 815px;
+  }
 }
 
-header, footer {
-  min-height:101px;
-  background-color: purple
+html {
+  height: 1056px;
+  width: 815px;
+  padding: 42px 54px 25px;
+  box-sizing: border-box;
 }
-header h2 {
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
   margin: 0;
 }
 
+header{
+  min-height:132px;
+  box-sizing: border-box;
+}
+
+#patientData {
+  font-size: 10pt;
+  display: flex;
+  justify-content: space-between;
+}
+
+#patientData section {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 66%;
+}
+
+#patientData ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header p {
+  font-size: 0.75em
+}
+
+header h2 {
+  margin-top: 15px;
+}
+
+footer{
+  border: 1px solid black;
+  min-height:40px;
+  box-sizing: box-border;
+  margin-bottom: 20px;
+}
+
+footer h2 {
+  margin-top: 15px;
+}
+
 main {
-  min-height:300px;
+  min-height:710px;
   display: flex;
   flex-direction: row;
+  border-bottom: 2px solid lightgrey;
+  border-top: 2px solid lightgrey;
+  padding-top: 20px;
 }
 
-section {
-  margin: 2px;
-  background-color: #0f0;
+main section {
+  background: #333;
+  box-sizing: border-box;
 }
 
-#digimeds {
-  width: 156px;
+main section h3 {
+  margin: 0;
 }
 
-section:last-of-type {
+main section:last-of-type {
   flex-grow: 1;
 }
 
-footer {
-  color: lightGrey;
-  font-size: 4em;
-  -webkit-text-stroke-color: teal;
-  -webkit-text-stroke-width: 2px;
+#digimeds {
+  width: 205px;
+  margin-right: 20px;
 }
+
+
+

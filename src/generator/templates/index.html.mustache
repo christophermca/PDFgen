@@ -8,11 +8,45 @@
   <body>
     <header>
       {{# patientData }}
+        <p>8 Week Report (Nov 14 - Jan 9, 2019)</p>
         <h2>{{name}}</h2>
+        <div id="patientData">
+          <section>
+            {{# DOB }}
+              <ul>
+                <li>Date of Birth</li>
+                <li>{{DOB}}</li>
+              </ul>
+            {{/DOB}}
+            {{# sex }}
+              <ul>
+                <li>Sex</li>
+                <li>{{sex}}</li>
+              </ul>
+            {{/sex}}
+            {{# firstIngestion }}
+              <ul>
+                <li>First Ingestion</li>
+                <li>{{firstIngestion}}</li>
+              </ul>
+            {{/firstIngestion}}
+            {{# condition }}
+              <ul>
+                <li>Condition</li>
+                <li>{{condition}}</li>
+              </ul>
+            {{/condition}}
+          </section>
+          <aside>
+            <span>Discussion Points</span>
+          </aside>
+        </div>
       {{/ patientData }}
     </header>
     <main>
-      <section id="digimeds">digimeds</section>
+      <section id="digimeds">
+        <h3>DigiMeds <span>(During Timeframe)</span></h3>
+      </section>
       <section>
         <div>section-content</div>
         <div>section-content</div>
@@ -20,7 +54,7 @@
         <div>section-content</div>
       </section>
     </main>
-    <footer> this is a test pdf </footer>
+    <footer> <h2> footer </h2> </footer>
 
   </body>
 </html>

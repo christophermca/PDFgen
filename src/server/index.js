@@ -29,7 +29,7 @@ app.use(express.static(publicPath));
 
 app.post(`/${endpointName}`, (req, res) => {
   const json = JSON.parse(req.body['json-data'])
-  res.render(__dirname + '/../generator/templates/index', json )
+  res.render(__dirname + '/../generator/templates/index', json)
 });
 
 app.listen(port, () => console.log(message));
