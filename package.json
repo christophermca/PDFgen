@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && npm run build-css && babel src -d dist \"$@\" --copy-files",
-    "build-css": "sass src/generator/templates/main.scss dist/generator/templates/main.css",
+    "build-css": "sass src/generator/templates/index.scss:dist/generator/templates/index.css",
     "watch": "npm run build --watch ",
     "start": "npm run build && node ./dist/server/index.js",
     "debug": "npm run build && node inspect ./dist/server/index.js",
