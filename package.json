@@ -21,10 +21,13 @@
     "mustache": "^3.0.1",
     "mustache-express": "^1.2.8",
     "puppeteer": "^1.11.0",
+    "sass": "^1.16.1",
+    "scss": "^0.2.4",
     "sinon": "^7.2.2"
   },
   "scripts": {
-    "build": "rm -rf dist && babel src -d dist \"$@\" --copy-files",
+    "build": "rm -rf dist && npm run build-css && babel src -d dist \"$@\" --copy-files",
+    "build-css": "sass src/generator/templates/main.scss dist/generator/templates/main.css",
     "watch": "npm run build --watch ",
     "start": "npm run build && node ./dist/server/index.js",
     "debug": "npm run build && node inspect ./dist/server/index.js",
