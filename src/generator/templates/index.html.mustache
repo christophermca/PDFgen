@@ -8,7 +8,7 @@
   <body>
     <header>
       {{# patientData }}
-        <p>8 Week Report (Nov 14 - Jan 9, 2019)</p>
+      <p>{{reportDuration}}&nbsp;(Nov 14 - Jan 9, 2019)</p>
         <h2>{{name}}</h2>
         <div id="patientData">
           <section>
@@ -45,16 +45,54 @@
     </header>
     <main>
       <section id="digimeds">
-        <h3>DigiMeds <span>(During Timeframe)</span></h3>
+        <h4 class="title">DigiMeds<span>&nbsp;(During Timeframe)</span></h4>
       </section>
-      <section>
-        <div>section-content</div>
-        <div>section-content</div>
-        <div>section-content</div>
-        <div>section-content</div>
+      <section id="charts">
+        <div id="proteusDigitalSummary">
+          <h4 class="title">Proteus Discover Summary</h4>
+        </div>
+        <div>
+          <h4 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h4>
+          {{# bloodPressure}}
+            <div class="comparisonInfo">
+              <div>
+                <span class="numberValues">{{systolic}}</span>
+                <p>Systolic</p>
+              </div>
+              <div>
+                <span class="numberValues">{{diastolic}}</span>
+                <p>Diatolic</p>
+              </div>
+            </div>
+          {{/ bloodPressure}}
+        </div>
+        <div>
+          <h4 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h4>
+          {{# bloodGlucose}}
+            <div class="comparisonInfo">
+              <div>
+                <span class="numberValues">{{before}}</span>
+                <p>Systolic</p>
+              </div>
+              <div>
+                <span class="numberValues">{{after}}</span>
+                <p>Diatolic</p>
+              </div>
+            </div>
+          {{/ bloodGlucose}}
+        </div>
+        <div>
+          <h4 class="title">Wellness Metrics</h4>
+        </div>
       </section>
     </main>
-    <footer> <h2> footer </h2> </footer>
+    <footer>
+      <ul>
+        <li>Report Generated {{createDate}}</li>
+        <li>Proteus ID - {{id}} </li>
+        <li>proteusdiscover</li>
+      </ul>
+    </footer>
 
   </body>
 </html>

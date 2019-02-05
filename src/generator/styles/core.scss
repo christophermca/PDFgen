@@ -1,0 +1,26 @@
+/* for development */
+@media screen {
+  html {
+    background: grey;
+    margin: 20px auto;
+  }
+
+  body {
+    background-color: #ffffff;
+  }
+}
+
+@media all {
+  body {
+    height: 976px;
+    width: 706px;
+    padding: 55px 55px 25px;
+  }
+
+  html {
+    height: 1056px;
+    width: 816px;
+    font-family: "Proxima Nova", sans-serif;
+  }
+}
+
