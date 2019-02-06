@@ -1,4 +1,6 @@
 /* for development */
+@import 'colors.scss';
+
 @media screen {
   html {
     background: grey;
@@ -13,15 +15,15 @@
 @media all {
   body {
     height: 976px;
-    width: 706px;
-    padding: 55px 55px 25px;
+    width: 745;
+    padding: 40px 40px 30px;
   }
 
   html {
     height: 1056px;
     width: 816px;
-    font-family: "Proxima Nova", sans-serif;
-    font-size: 12px;
+    font-size: 12pt;
+    font-family: 'proxima-nova', 'proxima nova', sans-serif;
   }
 }
 

@@ -8,7 +8,7 @@ const app = express();
 const port = 5713;
 const message = 'PDF Generator app is running....';
 const endpointName = 'generate_pdf';
-const stubData = require('./views/stubData.json')
+const stubData = require('./stubData.json')
 
 // To Use Mustache templating
 app.engine('html.mustache', mustacheExpress());

@@ -4,12 +4,16 @@
   <head>
     <title>Rendered Template</title>
     <link rel="stylesheet" type="text/css" href="/templates/index.css">
+    <script src="https://use.typekit.net/mui3wbr.js" async=""></script>
+    <script type="text/javascript">Typekit.load()</script>
   </head>
   <body>
     <header>
       {{# patientData }}
-      <p>{{reportDuration}}&nbsp;(Nov 14 - Jan 9, 2019)</p>
-        <h2>{{name}}</h2>
+      <p>
+        <span>{{reportDuration}} Report</span>&nbsp;(Nov 14 - Jan 9, 2019)
+      </p>
+        <h1>{{name}}</h1>
         <div id="patientData">
           <section>
             {{# DOB }}
@@ -38,21 +42,33 @@
             {{/condition}}
           </section>
           <aside>
-            <span>Discussion Points</span>
+            <div {{active}}class='active'></div>Discussion Points
           </aside>
         </div>
       {{/ patientData }}
     </header>
     <main>
       <section id="digimeds">
-        <h4 class="title">DigiMeds<span>&nbsp;(During Timeframe)</span></h4>
+        <h2 class="title">DigiMeds<span>&nbsp;(During Timeframe)</span></h2>
       </section>
       <section id="charts">
         <div id="proteusDigitalSummary">
-          <h4 class="title">Proteus Discover Summary</h4>
+          <h2 class="title">Proteus Discover Summary</h2>
+          <div id='summary'>
+            {{# summary}}
+              <div>
+                <span class="{{# notice}}active{{/ notice}}"></span>
+                <p>
+                  <label>{{ name }}</label>
+                  <span class="recommendation">{{ recommend }}</span>
+                  {{ info }}
+                </p>
+              </div>
+            {{/ summary}}
+          </div>
         </div>
         <div>
-          <h4 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h4>
+          <h2 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h2>
           {{# bloodPressure}}
             <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
@@ -68,7 +84,7 @@
           {{/ bloodPressure}}
         </div>
         <div>
-          <h4 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h4>
+          <h2 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h2>
           {{# bloodGlucose}}
             <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
@@ -84,7 +100,7 @@
           {{/ bloodGlucose}}
         </div>
         <div>
-          <h4 class="title">Wellness Metrics</h4>
+          <h2 class="title">Wellness Metrics</h2>
         </div>
       </section>
     </main>
