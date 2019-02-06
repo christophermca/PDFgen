@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.render(__dirname + '/views/index', {data: JSON.stringify(stubData)});
 });
 
-const publicPath = path.resolve(__dirname, '../generator/templates');
+const publicPath = path.resolve(__dirname, '../generator/');
 app.use(express.static(publicPath));
 
 app.post(`/${endpointName}`, (req, res) => {

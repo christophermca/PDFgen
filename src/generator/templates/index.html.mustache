@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Rendered Template</title>
-    <link rel="stylesheet" type="text/css" href="/index.css">
+    <link rel="stylesheet" type="text/css" href="/templates/index.css">
   </head>
   <body>
     <header>
@@ -54,29 +54,31 @@
         <div>
           <h4 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h4>
           {{# bloodPressure}}
+            <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
-              <div>
-                <span class="numberValues">{{systolic}}</span>
-                <p>Systolic</p>
-              </div>
-              <div>
-                <span class="numberValues">{{diastolic}}</span>
-                <p>Diatolic</p>
-              </div>
+             <div>
+              <span class="numberValues">{{systolic}}</span>
+              <p>Systolic</p>
+            </div>
+            <div>
+              <span class="numberValues">{{diastolic}}</span>
+              <p>Diatolic</p>
+            </div>
             </div>
           {{/ bloodPressure}}
         </div>
         <div>
           <h4 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h4>
           {{# bloodGlucose}}
+            <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
               <div>
                 <span class="numberValues">{{before}}</span>
-                <p>Systolic</p>
+                <p>Before meal</p>
               </div>
               <div>
                 <span class="numberValues">{{after}}</span>
-                <p>Diatolic</p>
+                <p>After meal</p>
               </div>
             </div>
           {{/ bloodGlucose}}
@@ -89,8 +91,8 @@
     <footer>
       <ul>
         <li>Report Generated {{createDate}}</li>
-        <li>Proteus ID - {{id}} </li>
-        <li>proteusdiscover</li>
+        <li>Proteus ID - {{patientData.id}} </li>
+        <li><img src='/assets/Proteus_Discover_logo_black.svg' /></li>
       </ul>
     </footer>
 

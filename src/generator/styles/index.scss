@@ -7,9 +7,17 @@ body {
   margin: 0;
 }
 
-header{
+header {
   min-height:132px;
   box-sizing: border-box;
+
+  p {
+    font-size: 0.75em
+  }
+
+  h2 {
+    margin-top: 15px;
+  }
 }
 
 #patientData {
@@ -29,22 +37,13 @@ header{
   }
 }
 
-header {
-  p {
-    font-size: 0.75em
-  }
-
-  h2 {
-    margin-top: 15px;
-  }
-}
-
 footer {
   border-top: 2px solid lightgrey;
   min-height:40px;
   box-sizing: border-box;
   margin-bottom: 20px;
   padding-top: 15px;
+  font-size: .91em;
 
   ul {
     padding: 0;
@@ -52,9 +51,15 @@ footer {
     display: flex;
     justify-content: space-between;
 
+    & > :last-child {
+      padding-bottom:0;
+
+    }
+
     li {
-      list-style: none;
       flex-grow: 2;
+      list-style: none;
+      padding-bottom: 8px;
     }
 
     & > :first-child {
@@ -102,11 +107,18 @@ main {
         padding: 25px 0;
         border-bottom: 1px solid lightgrey;
         min-height: 145px;
+
+        p {
+          padding-top: 25px;
+          font-size: .75em;
+          margin: 0;
+
+        }
       }
 
       .comparisonInfo {
         min-height: 50px;
-        padding-top: 25px;
+        padding-top: 20px;
         width: 123px;
         margin-right: 30px;
         display: flex;
@@ -134,6 +146,9 @@ main {
 
 .title {
   font-size: 1em;
+  span {
+    font-weight: 400;
+  }
 }
 
 #proteusDigitalSummary {
