@@ -71,36 +71,41 @@
           </div>
         </div>
         <div>
-          <h2 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h2>
-          {{# bloodPressure}}
-            <p>{{reportDuration}}</p>
-            <div class="comparisonInfo">
-             <div>
-              <span>{{systolic}}</span>
-              <p>Systolic</p>
-            </div>
-            <div>
-              <span>{{diastolic}}</span>
-              <p>Diatolic</p>
-            </div>
-            </div>
-          {{/ bloodPressure}}
+          <div class="info">
+            <h2 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h2>
+            {{# bloodPressure}}
+              <p>{{reportDuration}}</p>
+              <div class="comparisonInfo">
+                 <div>
+                  <span>{{systolic}}</span>
+                  <p>Systolic</p>
+                </div>
+                <div>
+                  <span>{{diastolic}}</span>
+                  <p>Diatolic</p>
+                </div>
+              </div>
+              <div class="placeholder"></div>
+            {{/ bloodPressure}}
+          </div>
         </div>
         <div>
-          <h2 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h2>
-          {{# bloodGlucose}}
-            <p>{{reportDuration}}</p>
-            <div class="comparisonInfo">
-              <div>
-                <span>{{before}}</span>
-                <p>Before meal</p>
+          <div class="info">
+            <h2 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h2>
+            {{# bloodGlucose}}
+              <p>{{reportDuration}}</p>
+              <div class="comparisonInfo">
+                <div>
+                  <span>{{before}}</span>
+                  <p>Before meal</p>
+                </div>
+                <div>
+                  <span>{{after}}</span>
+                  <p>After meal</p>
+                </div>
               </div>
-              <div>
-                <span>{{after}}</span>
-                <p>After meal</p>
-              </div>
-            </div>
-          {{/ bloodGlucose}}
+            {{/ bloodGlucose}}
+          </div>
         </div>
         <div id="wellnessMetrics">
           <h2 class="title">Wellness Metrics</h2>
