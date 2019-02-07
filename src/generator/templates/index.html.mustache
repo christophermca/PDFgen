@@ -42,16 +42,19 @@
             {{/condition}}
           </section>
           <aside>
-            <div {{active}}class='active'></div>Discussion Points
+            <svg height="15" width="15">
+              <circle cx="7.5" cy="7.5" r="7.5" stroke-width="1"/>
+            </svg>
+            <label>Discussion Points</label>
           </aside>
         </div>
       {{/ patientData }}
     </header>
     <main>
-      <section id="digimeds">
+      <section id="leftColumn">
         <h2 class="title">DigiMeds<span>&nbsp;(During Timeframe)</span></h2>
       </section>
-      <section id="charts">
+      <section id="rightColumn">
         <div id="proteusDigitalSummary">
           <h2 class="title">Proteus Discover Summary</h2>
           <div id='summary'>
