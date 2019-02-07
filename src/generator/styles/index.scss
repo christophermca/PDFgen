@@ -219,3 +219,18 @@ main {
   }
 }
 
+#wellnessMetrics {
+  section {
+    font-size: .75em;
+    padding-top: 25px;
+    display: flex;
+    justify-content:space-between;
+    flex-basis: 30px;
+    span {
+      font-weight: 600;
+    }
+    .duration {
+      color: $secondary;
+    }
+  }
+}

@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Rendered Template</title>
-    <link rel="stylesheet" type="text/css" href="/templates/index.css">
+    <link rel="stylesheet" type="text/css" href="/styles/index.css">
     <script src="https://use.typekit.net/mui3wbr.js" async=""></script>
     <script type="text/javascript">Typekit.load()</script>
   </head>
@@ -73,11 +73,11 @@
             <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
              <div>
-              <span class="numberValues">{{systolic}}</span>
+              <span>{{systolic}}</span>
               <p>Systolic</p>
             </div>
             <div>
-              <span class="numberValues">{{diastolic}}</span>
+              <span>{{diastolic}}</span>
               <p>Diatolic</p>
             </div>
             </div>
@@ -89,18 +89,29 @@
             <p>{{reportDuration}}</p>
             <div class="comparisonInfo">
               <div>
-                <span class="numberValues">{{before}}</span>
+                <span>{{before}}</span>
                 <p>Before meal</p>
               </div>
               <div>
-                <span class="numberValues">{{after}}</span>
+                <span>{{after}}</span>
                 <p>After meal</p>
               </div>
             </div>
           {{/ bloodGlucose}}
         </div>
-        <div>
+        <div id="wellnessMetrics">
           <h2 class="title">Wellness Metrics</h2>
+          <section>
+            {{# wellnessMetrics }}
+              <div>
+                {{# value}}
+                  <span>{{number}}</span>&nbsp;{{#units}}{{units}}{{/units}}
+                {{/ value}}
+                <div> {{name}} </div>
+                <div class="duration"> {{duration}} </div>
+              </div>
+            {{/ wellnessMetrics }}
+          </section>
         </div>
       </section>
     </main>
@@ -111,6 +122,5 @@
         <li><img src='/assets/Proteus_Discover_logo_black.svg' /></li>
       </ul>
     </footer>
-
   </body>
 </html>

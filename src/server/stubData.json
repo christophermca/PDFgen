@@ -37,5 +37,34 @@
   "bloodGlucose": {
     "before": 117,
     "after": 166
-  }
+  },
+  "wellnessMetrics": [
+    {
+      "name": "Weight",
+      "value": [{"number":180, "units": "lbs"}],
+      "duration": "Last patient entry"
+    },
+    {
+      "name": "Activity",
+      "value": [
+        {"number": 1, "units": "hr"},
+        {"number": 50, "units": "min"}
+      ],
+      "duration": "Daily avg"
+    },
+    {
+      "name": "Rest",
+      "value": [
+        {"number": 7, "units": "hr"},
+        {"number": 12, "units": "min"}
+      ],
+      "duration": "Daily avg"
+
+    },
+    {
+      "name": "Steps",
+      "value": [{"number":1374}],
+      "duration": "Daily avg"
+    }
+  ]
 }
