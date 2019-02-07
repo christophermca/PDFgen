@@ -16,15 +16,11 @@
       form {
         text-align: center;
       }
-      input[disabled] {
-        display: none;
-      }
     </style>
   </head>
   <body>
     <main>
       <form action="/generate_pdf" method="post">
-        <input disabled type="text" name="url" placeholder='[disabled] enter url'/>
         <textarea rows=30 cols=60 name="json-data" type="text" placeholder='Provide JSON formatted data'>{{data}}</textarea>
         <button type="submit">Generate PDF</button>
       </form>
