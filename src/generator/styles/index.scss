@@ -42,11 +42,11 @@ header {
     justify-content: space-between;
     align-items: center;
     min-width: 90px;
-    fill: $proteus-orange;
+    fill: $orange;
 
     div {
       border-radius: 25px;
-      background-color: $proteus-orange;
+      background-color: $orange;
       height:15px;
       width: 15px;
       border: 1px solid $secondary;
@@ -208,7 +208,7 @@ main {
         display: block;
         border-radius: 5px;
         &.active {
-          border: 3px solid $proteus-orange;
+          border: 3px solid $orange;
 
         }
 
