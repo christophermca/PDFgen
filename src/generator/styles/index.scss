@@ -8,8 +8,8 @@ body {
 }
 
 header {
-  min-height:132px;
   box-sizing: border-box;
+  min-height:132px;
 
   p {
     font-size: 1em;
@@ -26,15 +26,16 @@ header {
 }
 
 #patientData {
-  font-size: .75em;
   display: flex;
+  font-size: .75em;
   justify-content: space-between;
 
   section {
     display: flex;
-    justify-content: space-between;
     flex-basis: 55%;
+    justify-content: space-between;
   }
+
   aside {
     font-weight: 600;
     font-size: .75em;
