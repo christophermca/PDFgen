@@ -1,5 +1,12 @@
 .App {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 50px;
+}
+
+.App main {
+  display: flex;
+  flex-basis: 100%;
   justify-content: space-between;
-  width: 90%;
 }

@@ -1,9 +1,8 @@
 form {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 0;
   width: 45%;
-  padding-top: 25px;
 
 }
 
@@ -23,12 +22,12 @@ form > label > * {
   width: 400px;
 }
 
-.buttons {
+.controls {
   display: inline-flex;
   justify-content:space-between;
   margin-top: 30px;
 }
-.buttons input {
+.controls input {
   flex-basis: 47%;
 
 }
