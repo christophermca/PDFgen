@@ -1,4 +1,5 @@
 'use strict'
+
 const puppeteer = require('puppeteer');
 const path = require('path');
 const Graph = require('./presenter/graph');
@@ -20,34 +21,29 @@ class BrowserAPI {
     this.browser.disconnect()
   }
 
-  async saveAsPDF(pdfName='testing') {
+  async renderPDF() {
     if (this.page) {
-      await this.page.pdf({path: `./tmp/${pdfName}.pdf`, format: 'Letter' });
-      return pdfName
+      return await this.page.pdf({format: 'Letter' });
+    }
+  }
+
+  async preview() {
+    if (this.page) {
+      return await this.page.screenshot({type: "jpeg", fullPage: true, encoding: "base64"})
     }
   }
 
 
   async renderPage(template) {
     console.log('rendering page')
+      await this.page.setContent(template)
+      await this.page.emulateMedia('print');
+      await this.page.addStyleTag({path: path.resolve(__dirname, './styles/index.css')});
 
-    try {
-      if (/^(https?:\/\/)/.test(template)) {
-        await this.page.goto(template);
-      } else {
-        await this.page.setContent(template)
-
-        // Adds styles to page
-        await this.page.emulateMedia('print');
-        await this.page.addStyleTag({path: path.resolve(__dirname, './template/index.css')});
-
-
+      return {
+        preview: await this.preview(),
+        pdf:  await this.renderPDF()
       }
-    }
-
-    catch(err) {
-      return Promise.reject(err)
-    }
   }
 }
 

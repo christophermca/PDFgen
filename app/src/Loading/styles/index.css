@@ -1,0 +1,10 @@
+#loading {
+  display: flex;
+  position: absolute;
+  height: 50px;
+  width: 150px;
+  margin: 25px;
+  background: #e1e1e1;
+  margin: 5px;
+  border: 1px solid black;
+}

@@ -1,0 +1,15 @@
+#output {
+
+  text-align: center;
+  background: grey;
+  border: 2px solid #efefef;
+  padding: 40px 10px;
+  width: 50%
+}
+
+#output img {
+
+  display: block;
+  margin: 0 auto;
+  width: 500px
+}

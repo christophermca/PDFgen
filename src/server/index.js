@@ -1,12 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
+
 const app = express();
 const port = 5713;
 const message = 'PDF Generator app is running....'
+
+//Move to AWS lambda
 const PDFGenerator = require('../generator')
-const fs = require('fs');
+
 const {defaults: {genericTemplateName, ext}} = require('../../config.json')
+const stubData = require('../db/stubData.json');
 
 // check if tmp directory exists
 const dir = './tmp';
@@ -16,35 +21,23 @@ if (! fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
-// To read req body: needed for POST
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
-
 // Error Handling
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('UH OH!')
+  res.status(500).send(err)
 });
 
-// REST API
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/views/index.html'));
-});
+/**
+ * {description} PDF generator API
+ * {returns} JSON
+ */
+app.get('/generate_pdf', (req, res) => {
+  const {id, theme} = req.query
 
-app.get('/patient_data', (req, res) => {
-  res.sendFile(path.resolve(__dirname + './stubCSVData.csv'));
-});
-
-app.post('/generate_pdf', (req, res) => {
-  const {url, json, template} = req.body
-
-  new PDFGenerator(url, json, template)
-    .createPDF().then((fileName) => {
-    const pathLocation = `./tmp/${fileName}.pdf`;
-    return res.sendFile(path.resolve(pathLocation))
-  }).then(pathLocation => {
-    console.log(`PDf saved to: ${pathLocation}` )
-  });
+  //sudo call db and get JSON data
+  new PDFGenerator(id, theme)
+    .createPDF().then((outputData) => {
+      return res.json(outputData);
+  })
 });
 
 app.listen(port, () => console.log(message));

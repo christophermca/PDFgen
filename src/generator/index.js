@@ -7,18 +7,18 @@ const mustache = require('mustache');
 const fs = require('fs');
 const Graph = require('./presenter/graph')
 
-function getData(url, json) {
-  if(url) {
-    return url
-
-  } else {
-    const data = JSON.parse(json);
-    if (data.d3) {
-      const stubCSVData = fs.readFileSync(path.resolve(__dirname, '../server/stubCSVData.csv'), 'utf8');
-      Object.assign(data, {d3: stubCSVData})
-    }
-
-    return data
+//TODO move data to dynamodb
+function _getData(id) {
+  let data = null
+    if(id.length == 0) return;
+    const filepath = path.resolve(__dirname, `../db/${id}.json`);
+    if(fs.existsSync(filepath)) {
+      const json = fs.readFileSync(filepath, 'utf8')
+      return JSON.parse(json);
+    } else{
+      return ({
+        "error":`Records not found, no records were found for patient ${id}`
+      })
   }
 }
 
@@ -26,9 +26,7 @@ function _generateTemplate(filePath, data) {
   console.log('generating Template');
   try {
       const template = fs.readFileSync(filePath, 'utf8');
-
       const templateString = mustache.render(template, data);
-
       // generate Graphs
     if (data && data.d3) {
       const graph = new Graph(templateString);
@@ -38,39 +36,29 @@ function _generateTemplate(filePath, data) {
     }
     return Promise.resolve(templateString);
 
-  }
-  catch(err) {
-    console.log(err)
+  } catch(err) {
     return Promise.reject(err)
   }
-
 }
 
 class GeneratePDF {
-  constructor(url, json, template) {
-    this.data = getData(url, json)
+  constructor(id, theme) {
+    this.id = id
+    this.theme = theme
     this.templateData = config['defaults']
   }
 
-  createPDF(pdfName="testing") {
+  createPDF() {
+    const data = _getData(this.id);
     console.log('creating PDF');
     return browserAPI.setup().then(() => {
-      switch(typeof this.data) {
-        case 'string':
-          return browserAPI.renderPage(`${this.data}`).then(() =>
-            browserAPI.saveAsPDF(pdfName))
-          break;
-        case 'object':
-          if (this.data) {
-            return _generateTemplate(path.resolve(__dirname, `./template/${this.templateData.name}${this.templateData.ext}`), this.data)
-              .then(templateString => browserAPI.renderPage(`${templateString}`))
-              .then(() => browserAPI.saveAsPDF(pdfName))
-          }
-        default:
-          throw new TypeError('invalid data given to `createPDF`')
+      if (data.error) {
+        return data
       }
+        const templatePath = path.resolve(__dirname, `./templates/${this.templateData.name}${this.templateData.ext}`);
+        return _generateTemplate(templatePath, data)
+          .then(templateString => browserAPI.renderPage(`${templateString}`)).then(data => data);
     })
   }
 }
-
 module.exports = GeneratePDF

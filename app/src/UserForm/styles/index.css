@@ -1,0 +1,33 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  width: 45%;
+
+}
+
+form > label {
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+form > label > span {
+  width: 25%;
+  align-self: center;
+}
+form > label > * {
+  margin-left: 2px;
+  display: inline-flex;
+  width: 400px;
+}
+
+.controls {
+  display: inline-flex;
+  justify-content:space-between;
+  margin-top: 30px;
+}
+.controls input {
+  flex-basis: 47%;
+
+}

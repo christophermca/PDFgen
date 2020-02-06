@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rendered Template</title>
+    <link rel="stylesheet" type="text/css" href="/styles/index.css">
+    <script src="https://use.typekit.net/mui3wbr.js" async=""></script>
+    <script type="text/javascript">Typekit.load()</script>
+  </head>
+  <body>
+    <header>
+      {{# patientData }}
+      <p>
+        <span>{{reportDuration}} Report</span>&nbsp;(Nov 14 - Jan 9, 2019)
+      </p>
+        <h1>{{name}}</h1>
+        <div id="patientData">
+          <section>
+            {{# DOB }}
+              <ul>
+                <li>Date of Birth</li>
+                <li>{{DOB}}</li>
+              </ul>
+            {{/DOB}}
+            {{# sex }}
+              <ul>
+                <li>Sex</li>
+                <li>{{sex}}</li>
+              </ul>
+            {{/sex}}
+            {{# firstIngestion }}
+              <ul>
+                <li>First Ingestion</li>
+                <li>{{firstIngestion}}</li>
+              </ul>
+            {{/firstIngestion}}
+            {{# condition }}
+              <ul>
+                <li>Condition</li>
+                <li>{{condition}}</li>
+              </ul>
+            {{/condition}}
+          </section>
+          <aside>
+            <svg height="15" width="15">
+              <circle cx="7.5" cy="7.5" r="7.5" stroke-width="1"/>
+            </svg>
+            <label>Discussion Points</label>
+          </aside>
+        </div>
+      {{/ patientData }}
+    </header>
+    <main>
+      <section id="leftColumn">
+        <h2 class="title">DigiMeds<span>&nbsp;(During Timeframe)</span></h2>
+      </section>
+      <section id="rightColumn">
+        <div id="proteusDigitalSummary">
+          <h2 class="title">Proteus Discover Summary</h2>
+          <div id='summary'>
+            {{# summary}}
+              <div>
+                <span class="{{# notice}}active{{/ notice}}"></span>
+                <p>
+                  <label>{{ name }}</label>
+                  <span class="recommendation">{{ recommend }}</span>
+                  {{ info }}
+                </p>
+              </div>
+            {{/ summary}}
+          </div>
+        </div>
+        <div>
+          <div class="info">
+            <h2 class="title">Blood Pressure<span>&nbsp;(Patient Entered)</span></h2>
+            {{# bloodPressure}}
+              <p>{{reportDuration}}</p>
+              <div class="comparisonInfo">
+                 <div>
+                  <span>{{systolic}}</span>
+                  <p>Systolic</p>
+                </div>
+                <div>
+                  <span>{{diastolic}}</span>
+                  <p>Diatolic</p>
+                </div>
+              </div>
+              <div class="placeholder"></div>
+            {{/ bloodPressure}}
+          </div>
+        </div>
+        <div>
+          <div class="info">
+            <h2 class="title">Blood Glucose<span>&nbsp;(Patiend Entered)</span></h2>
+            {{# bloodGlucose}}
+              <p>{{reportDuration}}</p>
+              <div class="comparisonInfo">
+                <div>
+                  <span>{{before}}</span>
+                  <p>Before meal</p>
+                </div>
+                <div>
+                  <span>{{after}}</span>
+                  <p>After meal</p>
+                </div>
+              </div>
+            {{/ bloodGlucose}}
+          </div>
+        </div>
+        <div id="wellnessMetrics">
+          <h2 class="title">Wellness Metrics</h2>
+          <section>
+            {{# wellnessMetrics }}
+              <div>
+                {{# value}}
+                  <span>{{number}}</span>&nbsp;{{#units}}{{units}}{{/units}}
+                {{/ value}}
+                <div> {{name}} </div>
+                <div class="duration"> {{duration}} </div>
+              </div>
+            {{/ wellnessMetrics }}
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <ul>
+        <li>Report Generated {{createDate}}</li>
+        <li>Patient ID - {{patientData.id}} </li>
+        <li><img src='/assets/Proteus_Discover_logo_black.svg' /></li>
+      </ul>
+    </footer>
+  </body>
+</html>
