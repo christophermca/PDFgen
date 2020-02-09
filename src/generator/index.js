@@ -13,8 +13,7 @@ function _getData(id) {
     if(id.length == 0) return;
     const filepath = path.resolve(__dirname, `../db/${id}.json`);
     if(fs.existsSync(filepath)) {
-      const json = fs.readFileSync(filepath, 'utf8')
-      return JSON.parse(json);
+      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
     } else{
       return ({
         "error":`Records not found, no records were found for patient ${id}`
@@ -54,6 +53,7 @@ class GeneratePDF {
     const data = _getData(this.id);
 
     return browserAPI.setup().then(() => {
+      console.log(data)
       if (data.error) {
         return data
       }

@@ -1,12 +1,15 @@
-const {expect} = require('chai');
-const sinon = require('sinon')
-const BrowserAPI = require('../src/generator/BrowserAPI')
-const PDFGenerator = require('../src/generator')
+const chai = require('chai');
+const {expect} = chai;
+const sinon = require('sinon');
+const chaiAsPromised = require('chai-as-promised');
+const BrowserAPI = require('../src/generator/BrowserAPI');
+const PDFGenerator = require('../src/generator');
+chai.use(chaiAsPromised);
 
 
 describe('Generate PDF API', () => {
   let pdfGen;
-  beforeEach(() => pdfGen = new PDFGenerator(1234, 'default'))
+  beforeEach(() => pdfGen = new PDFGenerator(1234, 'default'));
 
   describe('PdfGenerator Instance', () => {
     describe('constructor', () => {
@@ -17,21 +20,31 @@ describe('Generate PDF API', () => {
       })
 
       it('should get template configuration information', () =>
-        expect(Object.keys(pdfGen.templateData)).to.deep.equal(['name', 'ext']))
-    });
+        expect(Object.keys(pdfGen.templateData)).to.deep.equal(['name', 'ext']));
+    })
 
     describe('createPDF', () => {
-      beforeEach(() => {
-      })
+      let output;
 
-      describe('when no records are available', () => {
+      beforeEach(() => {
+        pdfGen.id = 'testData';
+        pdfGen.theme = 'tester';
+      });
+
+      describe('when data is found', () => {
         it('should return a object with preview and pdf', () => {
-          const output = pdfGen.createPDF()
-          expect(Object.keys(output)).to.be.deep.equal(['pdf', 'preview'])
+          const output = pdfGen.createPDF();
+          return expect(pdfGen.createPDF()).to.eventually.have.keys(['pdf', 'preview']);
         });
-        it('should return a message to the user', () => {
-        });
-      })
+      });
+
+      describe('when no data is found', () => {
+        const pdfGen = new PDFGenerator(1234, 'dummy-theme');
+        console.log({ pdfGen })
+          return expect(pdfGen.createPDF()).to.eventually.be.have.keys('error');
+
+      });
+
     });
   });
 })

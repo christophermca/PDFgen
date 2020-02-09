@@ -15,6 +15,17 @@
     {{# d3 }}
       <div class="dataviz"></div>
     {{/ d3 }}
+    {{# testData}}
+      {{id}}
+      {{# data}}
+      <ol>
+        <li>{{number}}</li>
+        <li>{{bool}}</li>
+        <li>{{# object}} {{time}} {{/object}}</li>
+        <li>{{list}}</li>
+      </ol>
+      {{/data}}
+    {{/testData}}
     {{# patientData }}
     <ul id="patient-info">
       <li>name: {{name}}</li>

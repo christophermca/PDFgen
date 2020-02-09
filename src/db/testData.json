@@ -1,0 +1,17 @@
+{
+    "testData": true,
+    "id": "testData",
+    "data": {
+        "number": 3,
+        "bool": true,
+        "object": {
+            "time": "05:33:00"
+        },
+        "list": [
+            1,
+            2,
+            3,
+            4
+        ]
+    }
+}

@@ -38,7 +38,11 @@ class BrowserAPI {
     console.log('rendering page')
       await this.page.setContent(template)
       await this.page.emulateMedia('print');
-      await this.page.addStyleTag({path: path.resolve(__dirname, `./styles/${templateName}.css`)});
+      try {
+        await this.page.addStyleTag({path: path.resolve(__dirname, `./styles/${templateName}.css`)});
+      } catch(e) {
+        console.log('error: '+ e)
+      }
 
       return {
         preview: await this.preview(),
