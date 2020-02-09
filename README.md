@@ -1,11 +1,26 @@
-### POC of server side generation.
+## PDF Gen
+#### Server side PDF generation.
+
+### Summary
+
+PDF Generator will be used to generate web based templates as PDFs.
 
 
-### src/server is the collection of data.
-### src/generator is the module do generate PDF.
+### Run locally
+
+1. `npm start` // Starts PDF Generator Service localhost:3000
+2. In a second terminal `cd app && npm start` // Starts frontend application.
+   port:5713
 
 
-PDF Template Generator will be used to generate the templates needed to render
-the pdfs, I stubbed out a template for you to see how this feature will work.
+### Example templates
+
+|Theme|ID|
+| ----- | ------:|
+|default| 0000000|
+|webkit-style-test| testData|
+|default|1|
+
+
 
 
