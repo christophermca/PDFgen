@@ -1,11 +1,27 @@
-import React, {useCallback, useContext} from 'react';
+import React from 'react';
 import './styles/index.css'
 
+function UserForm({pdf, setPatientId, patientId, selectTheme, theme, onSubmission}) {
 
-function UserForm({setPatientId, patientId, selectTheme, theme, onSubmission}) {
-  const handlePatientId = useCallback(({target: {value}}) => {
-    setPatientId(value);
-  },[patientId])
+  const handlePatientId = ({target: {value}}) => {
+      setPatientId(value);
+  }
+  const downloadButton = () => {
+    return (
+      <input onClick={download} type='button' value='download'></input>);
+ }
+
+const download = () => {
+  const data = Buffer.from(pdf, 'base64');
+
+  const dwnldlnk = document.createElement('a')
+  dwnldlnk.download = ((!patientId.length) ? 'patient_000000_' : `${patientId}_`) + 'report';
+  dwnldlnk.href="data:application/pdf;base64," + data.toString('base64');
+  dwnldlnk.text = 'test'
+  dwnldlnk.click();
+  debugger
+
+}
 
   return (
       <form onSubmit={onSubmission}>
@@ -20,15 +36,13 @@ function UserForm({setPatientId, patientId, selectTheme, theme, onSubmission}) {
         <label>
           <span>patient ID:</span>
           <input type="text"
-                 required
                  value={patientId}
-                 onChange={handlePatientId} name="theme"
-                 placeholder="Patient ID (000000)"
+                 onChange={handlePatientId} name="theme" required="required" placeholder="Patient ID (000000)"
           />
         </label>
         <div className="controls">
           <input type="submit" value="Preview" />
-          <input type="submit" value="Download" />
+          {pdf && downloadButton()}
         </div>
       </form>
   )

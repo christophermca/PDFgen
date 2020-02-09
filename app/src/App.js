@@ -13,27 +13,26 @@ function App() {
   const [output, setOutput] = useState(null);
   const [loading, isLoading] = useState(false);
 
-  useEffect(() => {
-    if(output) {
-      isLoading(!loading)
-    }
-  }, [output])
-
-  const handleSubmit = (evt) => {
+  const handleSubmit = useCallback((evt) => {
     evt.preventDefault();
     isLoading(!loading);
     return fetch(`/generate_pdf?id=${patientId}&theme=${theme}`)
       .then(response =>  response.json())
-      .then(data => {setOutput(data)});
-  }
+      .then(data => {
+        isLoading(!data);
+        setOutput(data);
+      });
+
+  }, [loading, patientId, theme])
+
   return (
     <div className="App">
       <header>
       <h2> PDF Generation </h2>
       </header>
-        {loading && <Loading />}
+      {loading && <Loading />}
       <main>
-        <UserForm onSubmission={handleSubmit} selectTheme={setTheme} setPatientId={setPatientId} theme={theme} patientId={patientId}/>
+        <UserForm pdf={output && output.preview} onSubmission={handleSubmit} selectTheme={setTheme} setPatientId={setPatientId} theme={theme} patientId={patientId}/>
         <Output data={output}/>
       </main>
     </div>

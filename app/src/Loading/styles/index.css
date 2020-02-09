@@ -1,10 +1,11 @@
 #loading {
+  align-self: center;
+  align-items: center;
   display: flex;
   position: absolute;
   height: 50px;
   width: 150px;
-  margin: 25px;
+  justify-content:center;
   background: #e1e1e1;
-  margin: 5px;
-  border: 1px solid black;
+  border: 1px solid grey;
 }
