@@ -1,11 +1,29 @@
-### POC of server side generation.
+## PDF Generator 
+**Proof Of Concept**
+
+Browser agnostic solution to Convert HTML Templates with D3 Graphs to consistent PDF output
+
+#### Server side PDF generation.
+
+### Summary
+
+PDF Generator will be used to generate web based templates as PDFs.
 
 
-### src/server is the collection of data.
-### src/generator is the module do generate PDF.
+### Run locally
+
+1. `npm start` // Starts PDF Generator Service runs on port:5713
+2. `cd app && npm start` // Starts frontend application.localhost:3000
 
 
-PDF Template Generator will be used to generate the templates needed to render
-the pdfs, I stubbed out a template for you to see how this feature will work.
+### Example templates
+
+|Theme|ID|
+| ----- | ------:|
+|default| 0000000|
+|webkit-style-test| testData|
+|default|1|
+
+
 
 
