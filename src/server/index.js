@@ -7,7 +7,7 @@ const app = express();
 const port = 5713;
 const message = 'PDF Generator app is running....'
 
-//Move to AWS lambda
+//Move generator to AWS lambda
 const PDFGenerator = require('../generator')
 
 const {defaults: {genericTemplateName, ext}} = require('../../config.json')

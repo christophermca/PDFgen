@@ -13,7 +13,12 @@ function _getData(id) {
     if(id.length == 0) return;
     const filepath = path.resolve(__dirname, `../db/${id}.json`);
     if(fs.existsSync(filepath)) {
-      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
+      data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+      if (data.d3) {
+        const stubCSVData = fs.readFileSync(path.resolve(__dirname, '../server/stubCSVData.csv'), 'utf8');
+        data = Object.assign(data, {d3: stubCSVData})
+      }
+      return data;
     } else{
       return ({
         "error":`Records not found, no records were found for patient ${id}`
@@ -27,11 +32,9 @@ function _generateTemplate(name, filePath, data) {
       const template = fs.readFileSync(filePath, 'utf8');
       const templateString = mustache.render(template, data);
       // generate Graphs
-    if (data && data.d3) {
-      const graph = new Graph(templateString);
-      return graph.render(data).then(html => {
-        return Promise.resolve([html, name])
-      });
+      if (data && data.d3) {
+        const graph = new Graph(templateString);
+        return graph.render(data).then(html => Promise.resolve([html, name]));
     }
 
     return Promise.resolve([templateString, name]);
@@ -53,7 +56,6 @@ class GeneratePDF {
     const data = _getData(this.id);
 
     return browserAPI.setup().then(() => {
-      console.log(data)
       if (data.error) {
         return data
       }

@@ -6,8 +6,8 @@ const d3 = require('d3');
 function exampleGraph(DOM, data) {
   // set the dimensions and margins of the graph
   const margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 645 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
   // set the ranges
   const x = d3.scaleBand()

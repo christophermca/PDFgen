@@ -12,19 +12,19 @@
     {{/ systems }}
   </header>
   <body>
-    {{# d3 }}
-      <div class="dataviz"></div>
-    {{/ d3 }}
     {{# testData}}
       {{id}}
-      {{# data}}
-      <ol>
+      {{# dataTypes}}
+      <ul>
         <li>{{number}}</li>
         <li>{{bool}}</li>
         <li>{{# object}} {{time}} {{/object}}</li>
         <li>{{list}}</li>
-      </ol>
-      {{/data}}
+      </ul>
+      {{/dataTypes}}
+        {{# d3 }}
+          <div class="dataviz"></div>
+        {{/ d3 }}
     {{/testData}}
     {{# patientData }}
     <ul id="patient-info">

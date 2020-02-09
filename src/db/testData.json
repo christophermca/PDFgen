@@ -1,7 +1,8 @@
 {
     "testData": true,
     "id": "testData",
-    "data": {
+    "d3": true,
+    "dataTypes": {
         "number": 3,
         "bool": true,
         "object": {
