@@ -1,0 +1,16 @@
+h1 {
+  color: blue;
+  font-size: 36pt;
+}
+
+footer {
+  color: green;
+  font-size: 10em;
+  -webkit-text-stroke-color: orange;
+  -webkit-text-stroke-width: 3px;
+}
+
+.bar {
+  fill: teal;
+}
+

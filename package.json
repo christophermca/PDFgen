@@ -28,7 +28,6 @@
     "watch": "npm run build --watch ",
     "start": "npm run build && node ./dist/server/index.js",
     "debug": "npm run build && node inspect ./dist/server/index.js",
-    "clean-tmp": "rm -rf ./tmp/*.pdf",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "deploy": "aws s3 sync dist/ s3://cmca-pdf-generator-service --acl public-read",
     "stop": "pkill node"

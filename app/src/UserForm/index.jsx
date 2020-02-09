@@ -29,6 +29,7 @@ const download = () => {
                   onChange={(evt) => selectTheme(evt.target.value)} value={theme}
           >
             <option value="default"> default </option>
+            <option value="tester"> webkit-styles-test  </option>
           </select>
         </label>
         <label>

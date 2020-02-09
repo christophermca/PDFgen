@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles/testers.css">
+  </head>
+  <header>
+    <h1>{{ title }}</h1>
+    {{# systems }}
+      <p>PDF generated using {{ pdfGenBrowser }} browser!</p>
+      <p>PDF requested from {{ pdfRequester }} </p>
+    {{/ systems }}
+  </header>
+  <body>
+    {{# d3 }}
+      <div class="dataviz"></div>
+    {{/ d3 }}
+    {{# patientData }}
+    <ul id="patient-info">
+      <li>name: {{name}}</li>
+      <li>height: {{height}}</li>
+      <li>weight: {{weight}}</li>
+      <li>age: {{DOB}}</li>
+    </ul>
+    {{/ patientData }}
+  </body>
+  <footer> this is a test pdf </footer>
+</html>
+

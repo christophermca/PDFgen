@@ -22,7 +22,7 @@ function _getData(id) {
   }
 }
 
-function _generateTemplate(filePath, data) {
+function _generateTemplate(name, filePath, data) {
   console.log('generating Template');
   try {
       const template = fs.readFileSync(filePath, 'utf8');
@@ -31,10 +31,11 @@ function _generateTemplate(filePath, data) {
     if (data && data.d3) {
       const graph = new Graph(templateString);
       return graph.render(data).then(html => {
-        return Promise.resolve(html)
+        return Promise.resolve([html, name])
       });
     }
-    return Promise.resolve(templateString);
+
+    return Promise.resolve([templateString, name]);
 
   } catch(err) {
     return Promise.reject(err)
@@ -49,15 +50,20 @@ class GeneratePDF {
   }
 
   createPDF() {
-    const data = _getData(this.id);
     console.log('creating PDF');
+    const data = _getData(this.id);
+
     return browserAPI.setup().then(() => {
       if (data.error) {
         return data
       }
-        const templatePath = path.resolve(__dirname, `./templates/${this.templateData.name}${this.templateData.ext}`);
-        return _generateTemplate(templatePath, data)
-          .then(templateString => browserAPI.renderPage(`${templateString}`)).then(data => data);
+      const templateName = (this.theme == 'default') ? this.templateData.name : this.theme;
+        const templatePath = path.resolve(__dirname, `./templates/${templateName}${this.templateData.ext}`);
+        return _generateTemplate(templateName, templatePath, data)
+        .then(([templateString, name]) => {
+          return browserAPI.renderPage(`${templateString}`, name)
+        })
+        .then(data => data);
     })
   }
 }

@@ -1,0 +1,69 @@
+{
+  "title": "Blah",
+  "reportDuration": "2 week",
+  "patientData": {
+    "id": "1",
+    "name": "William Rikker",
+    "DOB": "Feb 3, 2088 (35 yrs)",
+    "sex": "Male"
+  },
+  "summary": [
+    {
+      "name": "Low Patchwear",
+      "notice":false,
+      "recommend": "Recommended: > 85%",
+      "info": "Identify and troubleshoot patchwear for accurate path-sensed data."
+    },
+    {
+      "name":"High Patient Entries",
+      "notice": false,
+      "recommend": "Recommended: > 3",
+      "info": "Encourage patient to self-enter readings to establish a trend."
+    },
+    {
+      "name": "High Overal Adherence",
+      "notice": false,
+      "recommend": "Recommend: > 80%",
+      "info" : "Encourage patient to continue medication taking patterns."
+
+    }
+  ],
+  "bloodPressure": {
+    "systolic": 130,
+    "diastolic": 61
+  },
+  "bloodGlucose": {
+    "before": 117,
+    "after": 166
+  },
+  "wellnessMetrics": [
+    {
+      "name": "Weight",
+      "value": [{"number":180, "units": "lbs"}],
+      "duration": "Last patient entry"
+    },
+    {
+      "name": "Activity",
+      "value": [
+        {"number": 1, "units": "hr"},
+        {"number": 50, "units": "min"}
+      ],
+      "duration": "Daily avg"
+    },
+    {
+      "name": "Rest",
+      "value": [
+        {"number": 7, "units": "hr"},
+        {"number": 12, "units": "min"}
+      ],
+      "duration": "Daily avg"
+
+    },
+    {
+      "name": "Steps",
+      "value": [{"number":1374}],
+      "duration": "Daily avg"
+    }
+  ]
+}
+

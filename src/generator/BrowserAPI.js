@@ -34,11 +34,11 @@ class BrowserAPI {
   }
 
 
-  async renderPage(template) {
+  async renderPage(template, templateName) {
     console.log('rendering page')
       await this.page.setContent(template)
       await this.page.emulateMedia('print');
-      await this.page.addStyleTag({path: path.resolve(__dirname, './styles/index.css')});
+      await this.page.addStyleTag({path: path.resolve(__dirname, `./styles/${templateName}.css`)});
 
       return {
         preview: await this.preview(),
