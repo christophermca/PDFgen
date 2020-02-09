@@ -11,7 +11,7 @@ function Output({data}) {
     }
   }
 
-  return ( <div id="output"> {value} </div>)
+  return ( <div data-testid="Output" id="output"> {value} </div>)
 };
 
 export default Output;

@@ -32,7 +32,7 @@ function App() {
       </header>
       {loading && <Loading />}
       <main>
-        <UserForm pdf={output && output.preview} onSubmission={handleSubmit} selectTheme={setTheme} setPatientId={setPatientId} theme={theme} patientId={patientId}/>
+        <UserForm pdf={output && output.pdf} onSubmission={handleSubmit} selectTheme={setTheme} setPatientId={setPatientId} theme={theme} patientId={patientId}/>
         <Output data={output}/>
       </main>
     </div>

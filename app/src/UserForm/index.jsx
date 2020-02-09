@@ -6,6 +6,7 @@ function UserForm({pdf, setPatientId, patientId, selectTheme, theme, onSubmissio
   const handlePatientId = ({target: {value}}) => {
       setPatientId(value);
   }
+
   const downloadButton = () => {
     return (
       <input onClick={download} type='button' value='download'></input>);
@@ -17,14 +18,11 @@ const download = () => {
   const dwnldlnk = document.createElement('a')
   dwnldlnk.download = ((!patientId.length) ? 'patient_000000_' : `${patientId}_`) + 'report';
   dwnldlnk.href="data:application/pdf;base64," + data.toString('base64');
-  dwnldlnk.text = 'test'
   dwnldlnk.click();
-  debugger
-
 }
 
   return (
-      <form onSubmit={onSubmission}>
+      <form data-testid="UserForm" onSubmit={onSubmission}>
         <label>
           <span> Theme: </span>
           <select type="dropdown" name="theme"
@@ -37,7 +35,7 @@ const download = () => {
           <span>patient ID:</span>
           <input type="text"
                  value={patientId}
-                 onChange={handlePatientId} name="theme" required="required" placeholder="Patient ID (000000)"
+                 onChange={handlePatientId} name="patientId" required="required" placeholder="Patient ID (0000000)"
           />
         </label>
         <div className="controls">
